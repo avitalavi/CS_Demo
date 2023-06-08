@@ -2,7 +2,7 @@
 model:snow-avi:
   name: snow-avi
   query: |-
-    select id, name, type, billingstreet, industry from "BRAD_INGEST_TEST"."BRAD_INGEST_TEST"."ACCOUNT"
+    select id, name, type_2, billingstreet, industry from "BRAD_INGEST_TEST"."BRAD_INGEST_TEST"."ACCOUNT"
     where TYPE is not null
   description: 
   connection: data_warehouse:snowflake-cs
