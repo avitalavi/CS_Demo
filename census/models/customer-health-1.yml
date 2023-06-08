@@ -1,0 +1,11 @@
+---
+model:customer-health-1:
+  name: customer_health
+  query: |-
+    select 1 as id, sum(Green) as Green, sum(yelow) as Yelow, sum(red) as Red
+    from
+    (SELECT *
+    FROM  "CS_DB"."PUBLIC"."CUSTOMER"
+    pivot (count(CUSTOMER_HEALTH) for CUSTOMER_HEALTH in ('Green','Yelow','Red')) as p (customer_id, customer_name, Green, Yelow, Red)) as x
+  description: 
+  connection: data_warehouse:snowflake-cs

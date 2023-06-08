@@ -1,0 +1,7 @@
+---
+model:my-customer-list:
+  name: my_customer_list
+  query: "select *, 'customer_list_avi_avital' as google_ads_customer_list from cs_sandbox.user
+    \nlimit 5"
+  description: 
+  connection: data_warehouse:redshift

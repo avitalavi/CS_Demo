@@ -1,0 +1,64 @@
+---
+sync:snowflake-users-slack-cs-sandbox:
+  paused: false
+  behavior:
+    operation: append
+    append_properties:
+      backfill_records: true
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: true
+      mode: add_only
+    name_normalization: match_source_names
+  triggers:
+    schedule:
+      frequency: never
+  destination:
+    connection_identifier: destination:slack
+    object_identifier: C039Z4RMVB3
+  source:
+    type: model
+    connection_identifier: data_warehouse:snowflake-cs
+    object_identifier: model:users
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: CURRENT_DATE
+    to:
+      field_name: CURRENT_DATE
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: EMAIL
+    to:
+      field_name: message_id
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: FIRST_NAME
+    to:
+      field_name: FIRST_NAME
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: LAST_NAME
+    to:
+      field_name: LAST_NAME
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  operational_settings:
+    alerts:
+      failed_run_notifications:
+        enabled: true
+      failed_record_notifications:
+        enabled: true
+        threshold_percent: 75

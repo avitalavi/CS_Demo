@@ -1,0 +1,53 @@
+---
+sync:bigquery-cs-customers-salesforce-account:
+  paused: false
+  behavior:
+    operation: upsert
+  triggers:
+    schedule:
+      frequency: never
+  destination:
+    connection_identifier: destination:cs-census-salesforce
+    object_identifier: Account
+  source:
+    type: model
+    connection_identifier: data_warehouse:bigquery
+    object_identifier: model:cs-customers
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: Company_ID
+    to:
+      field_name: External_ID__c
+    is_primary_identifier: true
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: Company_Name
+    to:
+      field_name: Name
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: Country
+    to:
+      field_name: Description
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: Total_Revenue
+    to:
+      field_name: AnnualRevenue
+    preserve_values: false
+  advanced_configuration: {}
+  operational_settings:
+    alerts:
+      failed_run_notifications:
+        enabled: true
+      failed_record_notifications:
+        enabled: true
+        threshold_percent: 75

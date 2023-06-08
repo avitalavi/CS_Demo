@@ -1,0 +1,8 @@
+---
+model:users2mexpanel:
+  name: users2mexpanel
+  query: |
+    select 25402199 as id, 'Avi' as first_name, 'Avital' as last_name, 'Avi Avital' as name,
+    'avi@getcensus.com' as email, '4082218814' as phone
+  description: 
+  connection: data_warehouse:redshift

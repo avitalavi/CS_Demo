@@ -1,0 +1,7 @@
+---
+model:cs-users:
+  name: cs_users
+  query: select ID, concat(FIRST_NAME, ' ', LAST_NAME) as NAME, FIRST_NAME, LAST_NAME,
+    EMAIL from "CS_DB"."PUBLIC"."USER"
+  description: 
+  connection: data_warehouse:snowflake-cs

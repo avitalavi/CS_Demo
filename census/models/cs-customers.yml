@@ -1,0 +1,9 @@
+---
+model:cs-customers:
+  name: CS_CUSTOMERS
+  query: |-
+    SELECT * FROM `cs-sandbox-347119.CS_DB.CUSTOMER`
+    -- where Company_ID = 25402199
+    -- where country = 'Spain'
+  description: 
+  connection: data_warehouse:bigquery

@@ -1,0 +1,52 @@
+---
+sync:redshift-my-customer-list-google-ads-customer-list:
+  paused: false
+  behavior:
+    operation: upsert
+  triggers:
+    schedule:
+      frequency: never
+  destination:
+    connection_identifier: destination:google-ads
+    object_identifier: user_data
+  source:
+    type: model
+    connection_identifier: data_warehouse:redshift
+    object_identifier: model:my-customer-list
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: email
+    to:
+      field_name: user_identifier.hashed_email
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: first_name
+    to:
+      field_name: user_identifier.address_info.hashed_first_name
+  - from:
+      type: column
+      data:
+        column_name: google_ads_customer_list
+    to:
+      field_name: user_list_id
+      lookup_object:
+        object_identifier: user_list
+        field_to_match_by: name
+  - from:
+      type: column
+      data:
+        column_name: last_name
+    to:
+      field_name: user_identifier.address_info.hashed_last_name
+  advanced_configuration: {}
+  operational_settings:
+    alerts:
+      failed_run_notifications:
+        enabled: true
+      failed_record_notifications:
+        enabled: true
+        threshold_percent: 75

@@ -1,0 +1,8 @@
+---
+model:mailchimp-audience:
+  name: mailchimp_audience
+  query: |-
+    SELECT MD5(LOWER(EMAIL)) as HASHED_EMAIL, EMAIL, 'unsubscribed' as status, FIRST_NAME, LAST_NAME
+    from "CS_DB"."PUBLIC"."USER"
+  description: 
+  connection: data_warehouse:snowflake-cs

@@ -1,0 +1,42 @@
+---
+sync:snowflake-cs-users-segment-netsuite-customer:
+  paused: false
+  behavior:
+    operation: upsert
+  triggers:
+    schedule:
+      frequency: never
+  destination:
+    connection_identifier: destination:netsuite
+    object_identifier: customer
+  source:
+    type: segment
+    connection_identifier: data_warehouse:snowflake-cs
+    object_identifier: segment:cs-users-segment
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: EMAIL
+    to:
+      field_name: email
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: FIRST_NAME
+    to:
+      field_name: firstName
+  - from:
+      type: column
+      data:
+        column_name: LAST_NAME
+    to:
+      field_name: lastName
+  operational_settings:
+    alerts:
+      failed_run_notifications:
+        enabled: true
+      failed_record_notifications:
+        enabled: true
+        threshold_percent: 75

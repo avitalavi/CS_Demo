@@ -1,0 +1,9 @@
+---
+model:iterabale-pleo-test:
+  name: iterabale_pleo_test
+  query: "SELECT *,\n'avi+demo@getcensus.com' as email,\n'Avi' as first_name,\n'Avital'
+    as last_name , \n'Census' as company_1,\nTO_JSON_STRING(struct(total_revenue,
+    Company_ID)) as company\nFROM `cs-sandbox-347119.CS_DB.CUSTOMER`\nwhere Company_ID
+    = 25402199"
+  description: 
+  connection: data_warehouse:bigquery

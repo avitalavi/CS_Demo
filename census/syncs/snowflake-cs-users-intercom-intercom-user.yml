@@ -1,0 +1,63 @@
+---
+sync:snowflake-cs-users-intercom-intercom-user:
+  paused: false
+  behavior:
+    operation: upsert
+  triggers:
+    schedule:
+      frequency: never
+  destination:
+    connection_identifier: destination:intercom-census-test
+    object_identifier: user
+  source:
+    type: model
+    connection_identifier: data_warehouse:snowflake-cs
+    object_identifier: model:cs-users-intercom
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: COMPANY_ID
+    to:
+      field_name: company_ids
+      lookup_object:
+        object_identifier: company
+        field_to_match_by: company_id
+    array_field: true
+  - from:
+      type: column
+      data:
+        column_name: EMAIL
+    to:
+      field_name: email
+    is_primary_identifier: true
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: external_id
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: LAST_SEEN
+    to:
+      field_name: last_seen_at
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: NAME
+    to:
+      field_name: name
+    preserve_values: false
+  advanced_configuration: {}
+  operational_settings:
+    alerts:
+      failed_run_notifications:
+        enabled: true
+      failed_record_notifications:
+        enabled: true
+        threshold_percent: 75

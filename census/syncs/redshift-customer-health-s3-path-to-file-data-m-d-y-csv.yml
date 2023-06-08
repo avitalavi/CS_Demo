@@ -1,0 +1,135 @@
+---
+sync:redshift-customer-health-s3-path-to-file-data-m-d-y-csv:
+  paused: false
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+    order_by: alphabetical_column_name
+  triggers:
+    schedule:
+      frequency: never
+  destination:
+    connection_identifier: destination:s3
+    object_identifier: path_to_file/data_%m-%d-%y.csv
+    file_settings:
+      file_format: CSV
+      delimiter: ","
+      include_header: true
+  source:
+    type: model
+    connection_identifier: data_warehouse:redshift
+    object_identifier: model:customer-health
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: customer_health
+    to:
+      field_name: customer_health
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: customer_id
+    to:
+      field_name: customer_id
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: customer_name
+    to:
+      field_name: customer_name
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: domain
+    to:
+      field_name: domain
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: email_prefix
+    to:
+      field_name: email_prefix
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: last_update
+    to:
+      field_name: last_update
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: phone_number
+    to:
+      field_name: phone_number
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: primary_contact_email
+    to:
+      field_name: primary_contact_email
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: sales_rep_email
+    to:
+      field_name: sales_rep_email
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: start_date
+    to:
+      field_name: start_date
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: url
+    to:
+      field_name: url
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  advanced_configuration:
+    file_format: CSV
+    csv_delimiter: ","
+    csv_include_header: true
+  operational_settings:
+    alerts:
+      failed_run_notifications:
+        enabled: true
+      failed_record_notifications:
+        enabled: true
+        threshold_percent: 75

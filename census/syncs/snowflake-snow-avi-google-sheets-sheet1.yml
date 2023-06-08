@@ -1,0 +1,86 @@
+---
+sync:snowflake-snow-avi-google-sheets-sheet1:
+  paused: true
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+    order_by: alphabetical_column_name
+  triggers:
+    schedule:
+      frequency: daily
+      hour: 17
+      minute: 0
+  destination:
+    connection_identifier: destination:google-sheets-1
+    object_identifier: '{"spreadsheet_id":"1sKVH9tSGlvmVBqRJrVIN931JqSCT_kW0R0DQdxPOMRA","sheet_id":0}'
+  source:
+    type: model
+    connection_identifier: data_warehouse:snowflake-cs
+    object_identifier: model:snow-avi
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: BILLINGSTREET
+    to:
+      field_name: BILLINGSTREET
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: ID
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: INDUSTRY
+    to:
+      field_name: INDUSTRY
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: NAME
+    to:
+      field_name: Name
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: TYPE
+    to:
+      field_name: TYPE
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: constant
+      data:
+        basic_type: number
+        value: '100'
+    to:
+      field_name: ARR
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  advanced_configuration: {}
+  operational_settings:
+    alerts:
+      failed_run_notifications:
+        enabled: true
+      failed_record_notifications:
+        enabled: true
+        threshold_percent: 75

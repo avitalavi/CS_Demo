@@ -1,0 +1,8 @@
+---
+model:customer-health:
+  name: customer_health
+  query: |-
+    select *, cast (random() * 100 as int) as customer_health, getdate() as last_update
+    from cs_sandbox.customer order by customer_id asc
+  description: 
+  connection: data_warehouse:redshift

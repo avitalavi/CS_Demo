@@ -1,0 +1,8 @@
+---
+model:cs-users-intercom:
+  name: cs_users_intercom
+  query: "select ID, concat(FIRST_NAME, ' ', LAST_NAME) as NAME, FIRST_NAME, LAST_NAME,
+    EMAIL, 'cs_census' as company_name, \n'[\"62857e42591215caa2954d6f-qualification-company\"]'
+    as company_id, current_timestamp as LAST_SEEN\nfrom \"CS_DB\".\"PUBLIC\".\"USER\""
+  description: 
+  connection: data_warehouse:snowflake-cs

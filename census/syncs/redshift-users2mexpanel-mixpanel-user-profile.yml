@@ -1,0 +1,65 @@
+---
+sync:redshift-users2mexpanel-mixpanel-user-profile:
+  paused: false
+  behavior:
+    operation: upsert
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  triggers:
+    schedule:
+      frequency: never
+  destination:
+    connection_identifier: destination:mixpanel
+    object_identifier: user
+  source:
+    type: model
+    connection_identifier: data_warehouse:redshift
+    object_identifier: model:users2mexpanel
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: email
+    to:
+      field_name: "$email"
+  - from:
+      type: column
+      data:
+        column_name: first_name
+    to:
+      field_name: "$first_name"
+  - from:
+      type: column
+      data:
+        column_name: id
+    to:
+      field_name: "$distinct_id"
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: last_name
+    to:
+      field_name: "$last_name"
+  - from:
+      type: column
+      data:
+        column_name: name
+    to:
+      field_name: "$name"
+  - from:
+      type: column
+      data:
+        column_name: phone
+    to:
+      field_name: "$phone"
+  advanced_configuration: {}
+  operational_settings:
+    alerts:
+      failed_run_notifications:
+        enabled: true
+      failed_record_notifications:
+        enabled: true
+        threshold_percent: 75

@@ -1,0 +1,68 @@
+---
+sync:bigquery-iterabale-pleo-test-iterable-user:
+  paused: false
+  behavior:
+    operation: upsert
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  triggers:
+    schedule:
+      frequency: never
+  destination:
+    connection_identifier: destination:iterable-test
+    object_identifier: user
+  source:
+    type: model
+    connection_identifier: data_warehouse:bigquery
+    object_identifier: model:iterabale-pleo-test
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: Company_Name
+    to:
+      field_name: companyName
+  - from:
+      type: column
+      data:
+        column_name: Company_Owner
+    to:
+      field_name: Company_Owner
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: company
+    to:
+      field_name: company
+  - from:
+      type: column
+      data:
+        column_name: email
+    to:
+      field_name: email
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: first_name
+    to:
+      field_name: first_name
+  - from:
+      type: column
+      data:
+        column_name: last_name
+    to:
+      field_name: last_name
+  advanced_configuration: {}
+  operational_settings:
+    alerts:
+      failed_run_notifications:
+        enabled: true
+      failed_record_notifications:
+        enabled: true
+        threshold_percent: 75

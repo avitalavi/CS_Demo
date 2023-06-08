@@ -1,0 +1,91 @@
+---
+sync:redshift-customer-health-airtable-cs-sandbox-customers-health:
+  paused: false
+  behavior:
+    operation: upsert
+  triggers:
+    schedule:
+      frequency: never
+  destination:
+    connection_identifier: destination:airtable-cs-sandbox
+    object_identifier: apptZvgvuSRepAygF/tblLnKyBDzHtn1d2D
+  source:
+    type: model
+    connection_identifier: data_warehouse:redshift
+    object_identifier: model:customer-health
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: customer_health
+    to:
+      field_name: custom_field:Health
+  - from:
+      type: column
+      data:
+        column_name: customer_id
+    to:
+      field_name: custom_field:Customer Id
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: customer_name
+    to:
+      field_name: custom_field:Customer Name
+  - from:
+      type: column
+      data:
+        column_name: domain
+    to:
+      field_name: custom_field:Domain
+  - from:
+      type: column
+      data:
+        column_name: email_prefix
+    to:
+      field_name: custom_field:Email Prefix
+  - from:
+      type: column
+      data:
+        column_name: last_update
+    to:
+      field_name: custom_field:Last Update
+  - from:
+      type: column
+      data:
+        column_name: phone_number
+    to:
+      field_name: custom_field:Phone Number
+  - from:
+      type: column
+      data:
+        column_name: primary_contact_email
+    to:
+      field_name: custom_field:Primary Contact Email
+  - from:
+      type: column
+      data:
+        column_name: sales_rep_email
+    to:
+      field_name: custom_field:Sales Rep Email
+  - from:
+      type: column
+      data:
+        column_name: start_date
+    to:
+      field_name: custom_field:Start Date
+  - from:
+      type: column
+      data:
+        column_name: url
+    to:
+      field_name: custom_field:URL
+  advanced_configuration: {}
+  operational_settings:
+    alerts:
+      failed_run_notifications:
+        enabled: true
+      failed_record_notifications:
+        enabled: true
+        threshold_percent: 75

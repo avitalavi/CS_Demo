@@ -1,0 +1,9 @@
+---
+model:users:
+  name: users
+  query: |
+    select CURRENT_DATE()::timestamp_tz as current_date, 'avi+demo@getcensus.com' as email, 'Avi' as first_name, 'Avital' as last_name , 'Census' as company
+    from "BRAD_INGEST_TEST"."BRAD_INGEST_TEST"."ACCOUNT"
+    where TYPE is not null limit 1
+  description: 
+  connection: data_warehouse:snowflake-cs

@@ -1,0 +1,58 @@
+---
+sync:googlesheets-sheet1-google-sheets-sheet1:
+  paused: false
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+    name_normalization: match_source_names
+    order_by: alphabetical_column_name
+  triggers:
+    schedule:
+      frequency: never
+  destination:
+    connection_identifier: destination:google-sheets-1
+    object_identifier: '{"spreadsheet_id":"1sKVH9tSGlvmVBqRJrVIN931JqSCT_kW0R0DQdxPOMRA","sheet_id":0}'
+  source:
+    type: table
+    connection_identifier: data_warehouse:googlesheets
+    table_catalog: google_sheets
+    table_schema: 1pYRHCZSGhHkOweW5v6HMV-RhuVbuNUG4IlrM98Dai3A
+    table_name: Sheet1
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: ARR
+    to:
+      field_name: ARR
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: Name
+    to:
+      field_name: Name
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: Srat Date
+    to:
+      field_name: Srat Date
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  operational_settings:
+    alerts:
+      failed_run_notifications:
+        enabled: true
+      failed_record_notifications:
+        enabled: true
+        threshold_percent: 75

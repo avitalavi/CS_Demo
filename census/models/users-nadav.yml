@@ -1,0 +1,8 @@
+---
+model:users-nadav:
+  name: users_nadav
+  query: "select id, first_name, last_name, \nconcat(concat(cast(first_name as text),
+    ' '), cast(last_name as text)) as full_name, email \nfrom cs_sandbox.user\nwhere
+    first_name like 'Abi%'\norder by first_name\nlimit 10\n\n"
+  description: 
+  connection: data_warehouse:redshift

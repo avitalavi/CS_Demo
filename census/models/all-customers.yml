@@ -1,0 +1,6 @@
+---
+model:all-customers:
+  name: All Customers
+  query: SELECT * FROM `cs-sandbox-347119.CS_DB.CUSTOMER`
+  description: 
+  connection: data_warehouse:bigquery

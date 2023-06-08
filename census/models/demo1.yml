@@ -1,0 +1,6 @@
+---
+model:demo1:
+  name: demo1
+  query: "SELECT * FROM \n\"CS_DB\".\"PUBLIC\".\"CUSTOMER\""
+  description: 
+  connection: data_warehouse:snowflake-demo-kurt

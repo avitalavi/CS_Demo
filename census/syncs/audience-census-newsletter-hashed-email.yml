@@ -1,0 +1,51 @@
+---
+sync:audience-census-newsletter-hashed-email:
+  paused: false
+  label: 'Audience: Census Newsletter - Hashed Email'
+  behavior:
+    operation: update
+  triggers:
+    schedule:
+      frequency: never
+  destination:
+    connection_identifier: destination:mailchimp
+    object_identifier: '{"object_type":"listmember","list_id":"1acce1f4ae","list_name":"Census
+      Newsletter","list_url":"https://us4.admin.mailchimp.com/lists/members?id=378581","connection_id":9986}'
+  source:
+    type: model
+    connection_identifier: data_warehouse:snowflake-cs
+    object_identifier: model:mailchimp-audience
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: FIRST_NAME
+    to:
+      field_name: FNAME
+  - from:
+      type: column
+      data:
+        column_name: HASHED_EMAIL
+    to:
+      field_name: prehashed_email_address
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: LAST_NAME
+    to:
+      field_name: LNAME
+  - from:
+      type: column
+      data:
+        column_name: STATUS
+    to:
+      field_name: status
+  advanced_configuration: {}
+  operational_settings:
+    alerts:
+      failed_run_notifications:
+        enabled: true
+      failed_record_notifications:
+        enabled: true
+        threshold_percent: 75
